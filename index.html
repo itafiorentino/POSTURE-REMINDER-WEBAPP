@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>THE NICEST POSTURE REMINDER APP</title>
+</head>
+<body>
+  <h1>THE NICEST POSTURE REMINDER APP</h1>
+  <h2>Click me and I will remind you about your posture every 5 minutes!</h2>
+  <button id="reminderButton">Remind me! ^w^</button>
+
+  <script>
+    const button = document.getElementById("reminderButton");
+    let intervalId = null;
+
+    const playRandomSound = () => {
+      const soundFiles = ["reminder1.mp3", "reminder2.mp3", "reminder3.mp3"]; // Replace with your sound file names
+      const randomIndex = Math.floor(Math.random() * soundFiles.length);
+      const audio = new Audio(soundFiles[randomIndex]);
+      audio.play();
+
+      // Clear any existing interval and start a new one
+      clearInterval(intervalId);
+      intervalId = setInterval(playRandomSound, 300000); // Play every 5 minutes
+    };
+
+    const toggleReminder = () => {
+      if (!intervalId) {
+        playRandomSound(); // Start by playing a sound
+        button.textContent = "Stop reminding me OwO";
+      } else {
+        clearInterval(intervalId);
+        intervalId = null;
+        button.textContent = "Remind me! ^w^";
+      }
+    };
+
+    button.addEventListener("click", toggleReminder);
+  </script>
+</body>
+</html>
